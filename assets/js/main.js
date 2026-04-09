@@ -1,35 +1,29 @@
-// main.js
+const poem = document.querySelector('.poem');
+const goldPhrase = document.querySelector('.last')?.textContent.trim() || '';
+const normalPhrase = poem ? poem.textContent.replace(goldPhrase, '').trim() : '';
 
-let grid = document.querySelector('.grid-container');
-let divs = document.querySelectorAll('.grid-container div');
-
-function randomize() {
-    console.log(divs.length, 'randomize!');
-
-    // this code affects the whole grid (rotate the container)
-    if (grid) {
-        grid.style.transform = `rotate(${Math.random() * 360}deg)`;
-    }
-
-    //just affects the grid divs
-   divs.forEach(function (div) {
-  let scale = randomNumber(.5, 1.2);
-  let translateX = randomNumber(0, 50);
-  let translateY = randomNumber(0, 20);
-  let rotate = randomNumber(0, 360);
-
-  if (Math.random() > .5) {
-    scale = 1;
-    translateX = randomNumber(0, 80);
-    translateY = randomNumber(0, 80);
-  }
-
-    div.style.transform= `scale(${scale}) translate(${translateX}%, ${translateY}%) rotate(${rotate}deg)`;
-
-});
-
+if (poem) {
+    document.body.addEventListener('click', () => {
+        createFloatingText(normalPhrase, goldPhrase);
+    });
 }
-document.addEventListener('click', randomize);
+
+function createFloatingText(text, goldText) {
+    const floating = document.createElement('div');
+    floating.className = 'floating-text';
+    floating.innerHTML = `${text}<br><span class="floating-text-gold">${goldText}</span>`;
+
+    const x = randomNumber(8, 75);
+    const y = randomNumber(5, 25);
+    floating.style.left = `${x}vw`;
+    floating.style.top = `${y}vh`;
+
+    document.body.appendChild(floating);
+
+    floating.addEventListener('animationend', () => {
+        floating.remove();
+    });
+}
 
 function randomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
