@@ -25,8 +25,38 @@ html {
 	margin: 10% 4rem 0 4rem;
 }
 
+div {
+	transition-property: transform;
+	transition-duration: 1s;
+
+}
+
 .last {
-	padding-bottom: 2rem; 
+	
+	padding-bottom: 2rem;
 	border-bottom: 2px solid rgb(220, 200, 180);
+}
+
+.last:hover {
+	animation-name: growAndGlow;
+	animation-duration: 3s;
+}
+
+
+
+@keyframes growAndGlow {
+	from{
+		color:whitesmoke
+	}
+	50% {
+		color: dodgerblue;
+		transform:skewX(30deg);
+		
+	}
+	to {
+		transform:scale(3);
+		color:red;
+
+	}
 }
 
