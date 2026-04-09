@@ -1,62 +1,121 @@
-/* styles.css */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&display=swap');
 
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
 
 body {
-	margin: 1rem;
-	background-color: black;
-	color: whitesmoke;
-	font-size: 5rem;
-	overflow: hidden;
-	background-image: url(../img/flames.gif);
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: cover;
-}
-html {
-	width: 100%;
-	height: 100%;
+    position: relative;
+    overflow: hidden;
+    background-color: black;
+    background-image: linear-gradient(
+            to right,
+            rgba(0, 0, 0, 0.22),
+            rgba(0, 0, 0, 0.52)
+        ),
+        url(../img/Rain.gif);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    color: #F2EEE8;
+    font-family: "Cormorant Garamond", Georgia, serif;
 }
 
 .grid-container {
-	display: grid;
-	/* grid-template-columns: 1fr 1fr 1fr;*/
-	grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-	gap: 2rem;
-	margin: 10% 4rem 0 4rem;
+    min-height: 100vh;
+    display: grid;
+    align-content: center;
+    justify-items: start;
+    gap: 0.35rem;
+    padding: 0 8vw;
 }
 
-div {
-	transition-property: transform;
-	transition-duration: 1s;
-
+.grid-container div {
+    font-size: clamp(2.8rem, 6vw, 5.8rem);
+    line-height: 0.95;
+    letter-spacing: 0.01em;
+    transition: transform 1.2s ease, color 1.2s ease, opacity 1.2s ease;
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.32);
 }
 
 .last {
-	
-	padding-bottom: 2rem;
-	border-bottom: 2px solid rgb(220, 200, 180);
+    color: #C8A95A;
+    padding-bottom: 0.2rem;
+    border-bottom: 1px solid rgba(200, 169, 90, 0.5);
 }
 
 .last:hover {
-	animation-name: growAndGlow;
-	animation-duration: 3s;
+    animation: glowDrift 2.6s ease-in-out;
 }
 
-
-
-@keyframes growAndGlow {
-	from{
-		color:whitesmoke
-	}
-	50% {
-		color: dodgerblue;
-		transform:skewX(30deg);
-		
-	}
-	to {
-		transform:scale(3);
-		color:red;
-
-	}
+.click-to-start {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: black;
+    font-size: 2rem;
+    font-weight: 600;
+    text-shadow: none;
+    z-index: 10;
 }
 
+.poem {
+    display: none;
+}
+
+.floating-text {
+    position: absolute;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+    white-space: pre-wrap;
+    font-size: clamp(1.8rem, 4vw, 4rem);
+    line-height: 1.05;
+    letter-spacing: 0.01em;
+    color: #F2EEE8;
+    text-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    transform: translateY(0);
+    animation: fadeFall 4s ease-out forwards;
+}
+
+.floating-text-gold {
+    color: #C8A95A;
+}
+
+@keyframes fadeFall {
+    0% {
+        transform: translateY(0px) scale(1);
+        opacity: 1;
+    }
+    30% {
+        transform: translateY(300px) scale(1.02);
+        opacity: 0.95;
+    }
+    100% {
+        transform: translateY(310px) scale(.98
+		);
+        opacity: 0;
+    }
+}
+
+@keyframes glowDrift {
+    from {
+        color: #C8A95A;
+        transform: translateX(0) translateY(0);
+        text-shadow: 0 0 0 rgba(200, 169, 90, 0);
+    }
+    50% {
+        color: #E1C67A;
+        transform: translateX(0.08em) translateY(-0.03em);
+        text-shadow: 0 0 18px rgba(200, 169, 90, 0.3);
+    }
+    to {
+        color: #C8A95A;
+        transform: translateX(0) translateY(0);
+        text-shadow: 0 0 0 rgba(200, 169, 90, 0);
+    }
+}
